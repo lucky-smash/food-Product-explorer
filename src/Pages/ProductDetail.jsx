@@ -52,7 +52,7 @@ const ProductDetail = () => {
   }
 
   return (
-    <div className="p-6 max-w-5xl mx-auto">
+    <div className="p-6 max-w-full mx-auto bg-amber-300">
       {/* Back Button */}
       <Link to="/" className="text-blue-600 underline">
         ← Back to products

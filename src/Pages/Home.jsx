@@ -1,48 +1,3 @@
-// import { useEffect, useState } from "react";
-// import { searchProductsByName } from "../services/openFoodApi.js";
-// import ProductCard from "../components/ProductCard";
-
-// const Home = () => {
-//     const [products, setProducts] = useState([]);
-//     const [search, setSearch] = useState("");
-//     const [loading, setLoading] = useState(false);
-
-//     useEffect(() => {
-
-//         const fetchProducts = async () => {
-//             const data = await searchProductsByName("pizza", 1);
-
-//             const validProducts = (data.products || []).filter(
-//                 (product) => product.code
-//             );
-
-//             setProducts(validProducts);
-//         };
-
-
-//         fetchProducts();
-//     }, []);
-
-
-
-//     return (
-//         <div className="p-4">
-//             <h1 className="text-2xl font-bold mb-4">
-//                 Products
-//             </h1>
-
-//             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-//                 {products.map((product, index) => (
-//                     <ProductCard key={product.code} product={product} />
-//                 ))}
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Home;
-
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -77,7 +32,7 @@ const Home = () => {
   };
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
+    <div className="p-6 max-w-full mx-auto bg-amber-300">
       {/* Page Title */}
       <h1 className="text-3xl font-bold mb-6 text-center">
         Food Explorer 🍔
