@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";//useparams helps to get the dynamic part of the url
 import { useEffect, useState } from "react";
 
 const ProductDetail = () => {
