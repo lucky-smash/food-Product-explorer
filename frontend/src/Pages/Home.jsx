@@ -5,6 +5,7 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
+  const [source, setSource] = useState("public"); // public / backend
 
   // Initial load (default products)
   useEffect(() => {
@@ -17,12 +18,39 @@ const Home = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(
-        `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${query}&search_simple=1&action=process&json=1&page_size=12`
-      );
+      // OLD (public API only)
+      // const res = await fetch(
+      //   `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${query}&search_simple=1&action=process&json=1&page_size=12`
+      // );
+      //
+      // const data = await res.json();
+      // setProducts(data.products || []);
 
+      // NEW (public or backend based on toggle)
+      const url =
+        source === "backend"
+          ? `http://localhost:5000/api/products?search=${encodeURIComponent(query)}`
+          : `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(
+              query
+            )}&search_simple=1&action=process&json=1&page_size=12`;
+
+      const res = await fetch(url);
       const data = await res.json();
-      setProducts(data.products || []);
+
+      let productsList;
+
+      if (source === "backend") {
+        productsList = (data || []).map((item) => ({
+          code: item._id, // use MongoDB _id as code for backend products
+          product_name: item.name,
+          brands: item.brand,
+          image_url: item.imageUrl,
+        }));
+      } else {
+        productsList = data.products || [];
+      }
+      // const productsList = source === "backend" ? productsList : data.products;
+      setProducts(productsList || []);
     } catch (error) {
       console.error("Error fetching products:", error);
       setProducts([]);
@@ -37,6 +65,31 @@ const Home = () => {
       <h1 className="text-3xl font-bold mb-6 text-center">
         Food Explorer 🍔
       </h1>
+
+      {/* Toggle between public and backend data source */}
+      <div className="mb-4 flex gap-4 items-center">
+        <label className="flex items-center gap-2">
+          <input
+            type="radio"
+            name="mark"
+            value="public"
+            checked={source === "public"}
+            onChange={() => setSource("public")}
+          />
+          Public API
+        </label>
+
+        <label className="flex items-center gap-2">
+          <input
+            type="radio"
+            name="mark"
+            value="backend"
+            checked={source === "backend"}
+            onChange={() => setSource("backend")}
+          />
+          Backend API
+        </label>
+      </div>
 
       {/* Search Bar */}
       <div className="mb-6 flex gap-2">
@@ -76,6 +129,7 @@ const Home = () => {
         {products.map((product) => (
           <Link
             to={`/product/${product.code}`}
+            state={{ source }}
             key={product.code}
             className="border rounded-xl p-4 hover:shadow-lg transition"
           >

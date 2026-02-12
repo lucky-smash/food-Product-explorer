@@ -1,25 +1,55 @@
-import { useParams, Link } from "react-router-dom";//useparams helps to get the dynamic part of the url
+import { useParams, Link, useLocation } from "react-router-dom";//useparams helps to get the dynamic part of the url
 import { useEffect, useState } from "react";
 
 const ProductDetail = () => {
   const { code } = useParams();
+  const location = useLocation();
+  const source = location.state?.source || "public";
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(
-          `https://world.openfoodfacts.org/api/v0/product/${code}.json`
-        );
+        // OLD (OpenFoodFacts only)
+        // const res = await fetch(
+        //   `https://world.openfoodfacts.org/api/v0/product/${code}.json`
+        // );
+        //
+        // const data = await res.json();
+        //
+        // // IMPORTANT: OpenFoodFacts returns status = 0 or 1
+        // if (data.status === 1 && data.product) {
+        //   setProduct(data.product);
+        // } else {
+        //   setProduct(null);
+        // }
 
+        const url =
+          source === "backend"
+            ? `http://localhost:5000/api/products/${code}`
+            : `https://world.openfoodfacts.org/api/v0/product/${code}.json`;
+
+        const res = await fetch(url);
         const data = await res.json();
 
-        // IMPORTANT: OpenFoodFacts returns status = 0 or 1
-        if (data.status === 1 && data.product) {
-          setProduct(data.product);
+        if (source === "backend") {
+          const backendProduct = data;
+          setProduct({
+            product_name: backendProduct.name,
+            brands: backendProduct.brand,
+            image_url: backendProduct.imageUrl,
+            quantity: backendProduct.quantity,
+            nutriments: backendProduct.nutriments,
+            nutrition_grades: backendProduct.nutrition_grades,
+          });
         } else {
-          setProduct(null);
+          // IMPORTANT: OpenFoodFacts returns status = 0 or 1
+          if (data.status === 1 && data.product) {
+            setProduct(data.product);
+          } else {
+            setProduct(null);
+          }
         }
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -30,7 +60,7 @@ const ProductDetail = () => {
     };
 
     fetchProduct();
-  }, [code]);
+  }, [code, source]);
 
   // Loading state
   if (loading) {
@@ -41,7 +71,7 @@ const ProductDetail = () => {
   if (!product) {
     return (
       <div className="p-6">
-        <Link to="/" className="text-blue-600 underline">
+        <Link to="/" state={{ source }} className="text-blue-600 underline">
           ← Back to products
         </Link>
         <p className="mt-4 text-red-500 font-medium">
@@ -54,7 +84,7 @@ const ProductDetail = () => {
   return (
     <div className="p-6 max-w-full mx-auto bg-amber-300">
       {/* Back Button */}
-      <Link to="/" className="text-blue-600 underline">
+      <Link to="/" state={{ source }} className="text-blue-600 underline">
         ← Back to products
       </Link>
 
