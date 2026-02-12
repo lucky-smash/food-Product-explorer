@@ -5,6 +5,7 @@ const ProductDetail = () => {
   const { code } = useParams();
   const location = useLocation();
   const source = location.state?.source || "public";
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -27,7 +28,8 @@ const ProductDetail = () => {
 
         const url =
           source === "backend"
-            ? `http://localhost:5000/api/products/${code}`
+            // ? `http://localhost:5000/api/products/${code}`
+            ? `${API_BASE}/api/products/${code}`
             : `https://world.openfoodfacts.org/api/v0/product/${code}.json`;
 
         const res = await fetch(url);

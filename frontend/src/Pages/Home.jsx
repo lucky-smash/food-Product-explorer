@@ -6,11 +6,14 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [source, setSource] = useState("public"); // public / backend
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
   // Initial load (default products)
   useEffect(() => {
     searchProducts("pizza");
   }, []);
+
+  
 
   const searchProducts = async (query = search) => {
     if (!query.trim()) return;
@@ -29,7 +32,8 @@ const Home = () => {
       // NEW (public or backend based on toggle)
       const url =
         source === "backend"
-          ? `http://localhost:5000/api/products?search=${encodeURIComponent(query)}`
+          // ? `http://localhost:5000/api/products?search=${encodeURIComponent(query)}`
+          ? `${API_BASE}/api/products?search=${encodeURIComponent(query)}`
           : `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(
               query
             )}&search_simple=1&action=process&json=1&page_size=12`;
