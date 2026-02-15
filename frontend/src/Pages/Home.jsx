@@ -65,10 +65,17 @@ const Home = () => {
 
   return (
     <div className="p-6 max-w-full mx-auto bg-amber-300">
-      {/* Page Title */}
-      <h1 className="text-3xl font-bold mb-6 text-center">
-        Food Explorer 🍔
-      </h1>
+
+     <div className="flex items-center justify-between mb-6">
+    <h1 className="text-3xl font-bold text-center">Food Explorer 🍔</h1>
+    <Link
+      to="/auth"
+      className="bg-white border border-amber-600 text-amber-700 px-4 py-2 rounded hover:bg-amber-100"
+    >
+      Login / Register
+    </Link>
+  </div>
+      
 
       {/* Toggle between public and backend data source */}
       <div className="mb-4 flex gap-4 items-center">
@@ -108,7 +115,7 @@ const Home = () => {
 
         <button
           onClick={() => searchProducts()}
-          className="bg-blue-600 text-white px-5 rounded hover:bg-blue-700"
+          className="bg-amber-600 text-white px-5 rounded hover:bg-amber-700"
         >
           Search
         </button>
