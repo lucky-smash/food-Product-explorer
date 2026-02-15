@@ -6,7 +6,7 @@ const ProductCard = ({ product }) => {
   return (
     <Link
       to={`/product/${product.code}`}
-      className="block border rounded-xl overflow-hidden hover:shadow-lg transition bg-white"
+      className="block border rounded-xl overflow-hidden hover:shadow-lg transition"
     >
       <img
         src={product.image_url || "/no-image.png"}
