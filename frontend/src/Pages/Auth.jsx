@@ -49,72 +49,92 @@ const Auth = () => {
     };
 
     return (
-        <div className="p-6 h-screen w-screen  bg-amber-300 rounded">
-            <div className="flex items-center justify-between mb-6 ">
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
+            <div className="w-full max-w-md">
+                <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
+                    <div className="text-center mb-8">
+                        <h1 className="text-2xl font-bold text-gray-900">🍎 Food Explorer</h1>
+                        <p className="text-gray-600 mt-2">Welcome back! Please sign in or create an account.</p>
+                    </div>
 
-              <Link
-                  to="/"
-                  className="bg-white border border-amber-600 text-amber-700 px-4 py-2 rounded hover:bg-amber-100"
-                >
-                  back to home
-                </Link>
-            </div>
-            <div className="mt-50 w-100 ml-100 bg-white p-6 rounded shadow">
-                <div className="flex gap-4 mb-6">
-                    <button
-                        className={`px-4 py-2 rounded ${mode === "login" ? "bg-amber-600 text-white" : "bg-gray-200"
+                    <div className="flex gap-2 mb-6 bg-gray-100 p-1 rounded-lg">
+                        <button
+                            className={`flex-1 px-4 py-2 rounded-md transition-colors ${
+                                mode === "login" 
+                                    ? "bg-amber-500 text-white shadow-sm" 
+                                    : "text-gray-700 hover:bg-gray-200"
                             }`}
-                        onClick={() => { setMode("login"); setError(""); }}
-                    >
-                        Login
-                    </button>
-                    <button
-                        className={`px-4 py-2 rounded ${mode === "register" ? "bg-amber-600 text-white" : "bg-gray-200"
+                            onClick={() => { setMode("login"); setError(""); }}
+                        >
+                            Login
+                        </button>
+                        <button
+                            className={`flex-1 px-4 py-2 rounded-md transition-colors ${
+                                mode === "register" 
+                                    ? "bg-amber-600 text-white shadow-sm" 
+                                    : "text-gray-300 hover:bg-gray-600"
                             }`}
-                        onClick={() => { setMode("register"); setError(""); }}
-                    >
-                        Register
-                    </button>
-                </div>
+                            onClick={() => { setMode("register"); setError(""); }}
+                        >
+                            Register
+                        </button>
+                    </div>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    {mode === "register" && (
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        {mode === "register" && (
+                            <input
+                                className="border border-gray-600 bg-gray-700 text-white px-4 py-3 w-full rounded-lg focus:ring-2 focus:ring-amber-500 outline-none placeholder-gray-400"
+                                type="text"
+                                name="name"
+                                placeholder="Full Name"
+                                value={form.name}
+                                onChange={handleChange}
+                                required
+                            />
+                        )}
+
                         <input
-                            className="border px-3 py-2 w-full rounded"
-                            type="text"
-                            name="name"
-                            placeholder="Name"
-                            value={form.name}
+                            className="border border-gray-300 bg-white text-gray-800 px-4 py-3 w-full rounded-lg focus:ring-2 focus:ring-amber-400 outline-none placeholder-gray-400"
+                            type="email"
+                            name="email"
+                            placeholder="Email Address"
+                            value={form.email}
                             onChange={handleChange}
+                            required
                         />
-                    )}
 
-                    <input
-                        className="border px-3 py-2 w-full rounded"
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        value={form.email}
-                        onChange={handleChange}
-                    />
+                        <input
+                            className="border border-gray-300 bg-white text-gray-800 px-4 py-3 w-full rounded-lg focus:ring-2 focus:ring-amber-400 outline-none placeholder-gray-400"
+                            type="password"
+                            name="password"
+                            placeholder="Password"
+                            value={form.password}
+                            onChange={handleChange}
+                            required
+                        />
 
-                    <input
-                        className="border px-3 py-2 w-full rounded"
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        value={form.password}
-                        onChange={handleChange}
-                    />
+                        {error && <p className="text-red-600 text-sm bg-red-50 p-3 rounded-lg">{error}</p>}
 
-                    {error && <p className="text-red-600 text-sm">{error}</p>}
+                        {success && <p className="text-green-700 text-sm bg-green-50 p-3 rounded-lg">{success}</p>}
 
-                    {success && <p className="text-green-700 text-sm">{success}</p>}
+                        <button 
+                            className="w-full bg-amber-600 text-white py-3 rounded-lg hover:bg-amber-700 transition-colors disabled:opacity-60 font-medium" 
+                            disabled={loading}
+                        >
+                            {loading ? "Please wait..." : mode === "login" ? "Sign In" : "Create Account"}
+                        </button>
+                    </form>
 
-                    <button className="w-full bg-amber-600 text-white py-2 rounded disabled:opacity-60" disabled={loading}>
-                        {loading ? "Please wait..." : mode === "login" ? "Login" : "Register"}
-                    </button>
-                </form></div>
+                    <div className="mt-6 text-center">
+                        <Link
+                            to="/"
+                            className="text-amber-400 hover:text-amber-300 font-medium"
+                        >
+                            ← Back to Home
+                        </Link>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

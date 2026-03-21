@@ -66,70 +66,98 @@ const ProductDetail = () => {
 
   // Loading state
   if (loading) {
-    return <p className="p-6">Loading product details...</p>;
+    return (
+      <div className="p-6 max-w-4xl mx-auto">
+        <div className="bg-white p-6 rounded-2xl shadow-lg">
+          <p className="text-center text-gray-600">Loading product details...</p>
+        </div>
+      </div>
+    );
   }
 
   // Product not found state
   if (!product) {
     return (
-      <div className="p-6">
-        <Link to="/" state={{ source }} className="text-blue-600 underline">
-          ← Back to products
-        </Link>
-        <p className="mt-4 text-red-500 font-medium">
-          Product not found.
-        </p>
+      <div className="p-6 max-w-4xl mx-auto">
+        <div className="bg-white p-6 rounded-2xl shadow-lg">
+          <Link to="/" state={{ source }} className="text-amber-600 hover:text-amber-700 font-medium">
+            ← Back to products
+          </Link>
+          <p className="mt-4 text-red-500 font-medium">
+            Product not found.
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="p-6 max-w-full mx-auto bg-amber-300">
-      {/* Back Button */}
-      <Link to="/" state={{ source }} className="text-blue-600 underline">
-        ← Back to products
-      </Link>
+    <div className="p-6 max-w-4xl mx-auto">
+      <div className="bg-linear-to-br from-white to-gray-50 p-8 rounded-2xl shadow-lg border border-gray-200">
+        {/* Back Button */}
+        <Link to="/" state={{ source }} className="text-amber-600 hover:text-amber-700 font-medium mb-6 inline-block">
+          ← Back to products
+        </Link>
 
-      {/* Product Info */}
-      <div className="mt-6 grid md:grid-cols-2 gap-6">
-        <img
-          src={product.image_url || "/no-image.png"}
-          alt={product.product_name || "Product image"}
-          className="w-full rounded-xl border"
-        />
+        {/* Product Info */}
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+            <img
+              src={product.image_url || "/no-image.png"}
+              alt={product.product_name || "Product image"}
+              className="w-full h-64 object-cover rounded-lg"
+            />
+          </div>
 
-        <div>
-          <h1 className="text-3xl font-bold mb-2">
-            {product.product_name || "Unnamed product"}
-          </h1>
+          <div className="space-y-4">
+            <h1 className="text-3xl font-bold text-gray-800">
+              {product.product_name || "Unnamed product"}
+            </h1>
 
-          <p className="mb-1">
-            <strong>Brand:</strong> {product.brands || "N/A"}
-          </p>
+            <div className="space-y-2">
+              <p className="text-gray-700">
+                <strong className="text-gray-900">Brand:</strong> {product.brands || "N/A"}
+              </p>
 
-          <p className="mb-1">
-            <strong>Quantity:</strong> {product.quantity || "N/A"}
-          </p>
+              <p className="text-gray-700">
+                <strong className="text-gray-900">Quantity:</strong> {product.quantity || "N/A"}
+              </p>
 
-          <p className="mb-3">
-            <strong>Nutrition Grade:</strong>{" "}
-            <span className="px-2 py-1 bg-green-100 rounded">
-              {product.nutrition_grades
-                ? product.nutrition_grades.toUpperCase()
-                : "N/A"}
-            </span>
-          </p>
+              <p className="text-gray-700">
+                <strong className="text-gray-900">Nutrition Grade:</strong>{" "}
+                <span className="px-3 py-1 bg-amber-100 text-amber-800 rounded-full font-medium">
+                  {product.nutrition_grades
+                    ? product.nutrition_grades.toUpperCase()
+                    : "N/A"}
+                </span>
+              </p>
+            </div>
 
-          <h2 className="text-xl font-semibold mt-4 mb-2">
-            Nutrition (per 100g)
-          </h2>
+            <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                🍎 Nutrition (per 100g)
+              </h2>
 
-          <ul className="list-disc ml-6 space-y-1">
-            <li>Energy: {product.nutriments?.energy_100g ?? "—"} kcal</li>
-            <li>Fat: {product.nutriments?.fat_100g ?? "—"} g</li>
-            <li>Sugars: {product.nutriments?.sugars_100g ?? "—"} g</li>
-            <li>Protein: {product.nutriments?.proteins_100g ?? "—"} g</li>
-          </ul>
+              <ul className="space-y-2">
+                <li className="flex justify-between">
+                  <span>Energy:</span>
+                  <span className="font-medium">{product.nutriments?.energy_100g ?? "—"} kcal</span>
+                </li>
+                <li className="flex justify-between">
+                  <span>Fat:</span>
+                  <span className="font-medium">{product.nutriments?.fat_100g ?? "—"} g</span>
+                </li>
+                <li className="flex justify-between">
+                  <span>Sugars:</span>
+                  <span className="font-medium">{product.nutriments?.sugars_100g ?? "—"} g</span>
+                </li>
+                <li className="flex justify-between">
+                  <span>Protein:</span>
+                  <span className="font-medium">{product.nutriments?.proteins_100g ?? "—"} g</span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
