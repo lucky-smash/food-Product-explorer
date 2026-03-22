@@ -15,44 +15,20 @@ const Sidebar = ({ onSearch, setSearchQuery }) => {
     onSearch(search, source);
   };
 
-  const handleChatSend = () => {
-    if (chatInput.trim()) {
-      setChatMessages([...chatMessages, { text: chatInput, user: true }, { text: "AI Recommendation: Try searching for 'healthy snacks'!", ai: true }]);
-      setChatInput("");
-    }
-  };
+//   const handleChatSend = () => {
+//     if (chatInput.trim()) {
+//       setChatMessages([...chatMessages, { text: chatInput, user: true }, { text: "AI Recommendation: Try searching for 'healthy snacks'!", ai: true }]);
+//       setChatInput("");
+//     }
+//   };
 
   const toggleFilter = (filterName) => {
     setFilters(prev => ({ ...prev, [filterName]: !prev[filterName] }));
   };
 
   return (
-    <div className="w-72 bg-white rounded-3xl shadow-xl border border-gray-100 flex flex-col max-h-screen overflow-hidden">
-      <style>{`
-        .sidebar-scroll {
-          scrollbar-width: thin;
-          scrollbar-color: #6b7280 #f3f4f6;
-        }
-        .sidebar-scroll::-webkit-scrollbar {
-          width: 8px;
-        }
-        .sidebar-scroll::-webkit-scrollbar-track {
-          background: #f3f4f6;
-          border-radius: 10px;
-          margin: 5px;
-        }
-        .sidebar-scroll::-webkit-scrollbar-thumb {
-          background: #6b7280;
-          border-radius: 10px;
-          border: 2px solid transparent;
-          background-clip: content-box;
-          min-height: 50px;
-        }
-        .sidebar-scroll::-webkit-scrollbar-thumb:hover {
-          background: #374151;
-          background-clip: content-box;
-        }
-      `}</style>
+    <div className="w-62  bg-white rounded-3xl shadow-xl border border-gray-100 flex flex-col h-full overflow-hidden">
+     
 
       <div className="flex-1 overflow-y-auto sidebar-scroll p-6 space-y-6">
         {/* Header with Profile Picture */}
@@ -72,7 +48,7 @@ const Sidebar = ({ onSearch, setSearchQuery }) => {
 
         {/* 🔍 Search Section */}
         <div className="sidebar-item">
-          <label className="block text-sm font-semibold text-gray-200 mb-3">Find Food</label>
+          <label className="block text-sm font-semibold text-gray-400 mb-3">Find Food</label>
           <div className="relative">
             <input
               type="text"
@@ -96,7 +72,7 @@ const Sidebar = ({ onSearch, setSearchQuery }) => {
 
         {/* 🔁 Data Source Section */}
         <div className="sidebar-item">
-          <label className="block text-sm font-semibold text-gray-200 mb-3">Data Source</label>
+          <label className="block text-sm font-semibold text-gray-400 mb-3">Data Source</label>
           <div className="space-y-2">
             <button
               onClick={() => setSource("public")}
@@ -123,7 +99,7 @@ const Sidebar = ({ onSearch, setSearchQuery }) => {
 
         {/* 🧠 Dietary Filters Section */}
         <div className="sidebar-item">
-          <label className="block text-sm font-semibold text-gray-200 mb-3">Dietary Filters</label>
+          <label className="block text-sm font-semibold text-gray-400 mb-3">Dietary Filters</label>
           <div className="space-y-2">
             {[
               { key: 'vegetarian', label: '🥬 Vegetarian', color: 'green' },
@@ -135,7 +111,7 @@ const Sidebar = ({ onSearch, setSearchQuery }) => {
                 onClick={() => toggleFilter(filter.key)}
                 className={`w-full p-3 rounded-xl border-2 transition-all text-left font-medium flex items-center justify-between hover:shadow-md ${
                   filters[filter.key]
-                    ? `bg-${filter.color}-500 border-${filter.color}-400 text-white shadow-lg`
+                    ? `bg-${filter.color}-500 border-${filter.color}-400 text-black shadow-lg`
                     : "bg-gray-700 border-gray-600 text-gray-200 hover:border-gray-500"
                 }`}
               >
@@ -153,7 +129,7 @@ const Sidebar = ({ onSearch, setSearchQuery }) => {
 
         {/* 🌿 Lifestyle Preferences */}
         <div className="sidebar-item">
-          <label className="block text-sm font-semibold text-gray-200 mb-3">Lifestyle</label>
+          <label className="block text-sm font-semibold text-gray-400 mb-3">Lifestyle</label>
           <div className="space-y-2">
             {[
               { key: 'organic', label: '🌱 Organic', color: 'green' },
@@ -164,7 +140,7 @@ const Sidebar = ({ onSearch, setSearchQuery }) => {
                 onClick={() => toggleFilter(filter.key)}
                 className={`w-full p-3 rounded-xl border-2 transition-all text-left font-medium flex items-center justify-between hover:shadow-md ${
                   filters[filter.key]
-                    ? `bg-${filter.color}-500 border-${filter.color}-400 text-white shadow-lg`
+                    ? `bg-${filter.color}-500 border-${filter.color}-400 text-black shadow-lg`
                     : "bg-gray-700 border-gray-600 text-gray-200 hover:border-gray-500"
                 }`}
               >
@@ -182,7 +158,7 @@ const Sidebar = ({ onSearch, setSearchQuery }) => {
 
         {/* 💡 Quick Tips */}
         <div className="sidebar-item">
-          <label className="block text-sm font-semibold text-gray-200 mb-3">💡 Quick Tips</label>
+          <label className="block text-sm font-semibold text-gray-400 mb-3">💡 Quick Tips</label>
           <div className="bg-blue-900 border border-blue-700 rounded-xl p-3 text-sm text-blue-200">
             <p>✓ Use filters to narrow down your search</p>
             <p className="mt-2">✓ Check nutrition grades for healthier options</p>
@@ -191,7 +167,7 @@ const Sidebar = ({ onSearch, setSearchQuery }) => {
 
         {/* 🔥 Popular Searches */}
         <div className="sidebar-item">
-          <label className="block text-sm font-semibold text-gray-200 mb-3">🔥 Popular</label>
+          <label className="block text-sm font-semibold text-gray-400 mb-3">🔥 Popular</label>
           <div className="space-y-2">
             {['Pizza', 'Salad', 'Smoothie', 'Pasta'].map(item => (
               <button

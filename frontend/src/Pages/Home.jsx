@@ -81,7 +81,7 @@ const Home = () => {
             {loading && (
               <div className="flex items-center justify-center h-64">
                 <div className="text-center">
-                  <div className="animate-spin text-4xl mb-3">🔄</div>
+                  <div className="animate-spin text-4xl mb-3">↻</div>
                   <p className="text-gray-500 font-medium">Searching products...</p>
                 </div>
               </div>

@@ -127,7 +127,13 @@ const Dashboard = () => {
           <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
             <h2 className="text-xl font-bold mb-6 text-gray-800">📦 Your Products</h2>
 
-            {listLoading && <p className="text-gray-600">Loading products...</p>}
+            {/* Loading Spinner */}
+            {listLoading && (
+              <div className="flex items-center justify-center mb-4">
+                <span className="inline-block animate-spin text-4xl">↻</span>
+                <p className="ml-3  text-gray-500 font-medium">Loading products...</p>
+              </div>
+            )}
             {listError && <p className="text-red-600 bg-red-50 p-3 rounded-lg">{listError}</p>}
 
             {!listLoading && !listError && products.length === 0 && (
