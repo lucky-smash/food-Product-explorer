@@ -14,8 +14,8 @@ router.post('/', authMiddleware, createProduct);
 router.get('/:id', getProductById);
 
 // Route to update a product by ID
-router.put('/:id', updateProduct);
+router.put('/:id', authMiddleware, updateProduct);
 
 // Route to delete a product by ID
-router.delete('/:id', deleteProduct);
+router.delete('/:id', authMiddleware, deleteProduct);
 export default router;

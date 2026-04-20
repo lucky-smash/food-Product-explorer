@@ -151,7 +151,9 @@ const Home = () => {
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <h3 className="font-semibold text-amber-900 mb-2">🎯 Personalized Suggestion</h3>
-                      <p className="text-sm text-amber-800">Complete your profile to get personalized food recommendations based on your dietary preferences and health goals.</p>
+                      <p className="text-sm text-amber-800">
+                        Complete your profile to get personalized food recommendations based on your dietary preferences and health goals.
+                      </p>
                       <button className="mt-3 px-4 py-2 bg-amber-600 text-white rounded-lg text-sm font-medium hover:bg-amber-700 transition-colors">
                         Complete Profile
                       </button>

@@ -15,12 +15,12 @@ const Sidebar = ({ onSearch, setSearchQuery }) => {
     onSearch(search, source);
   };
 
-//   const handleChatSend = () => {
-//     if (chatInput.trim()) {
-//       setChatMessages([...chatMessages, { text: chatInput, user: true }, { text: "AI Recommendation: Try searching for 'healthy snacks'!", ai: true }]);
-//       setChatInput("");
-//     }
-//   };
+  //   const handleChatSend = () => {
+  //     if (chatInput.trim()) {
+  //       setChatMessages([...chatMessages, { text: chatInput, user: true }, { text: "AI Recommendation: Try searching for 'healthy snacks'!", ai: true }]);
+  //       setChatInput("");
+  //     }
+  //   };
 
   const toggleFilter = (filterName) => {
     setFilters(prev => ({ ...prev, [filterName]: !prev[filterName] }));
@@ -28,7 +28,7 @@ const Sidebar = ({ onSearch, setSearchQuery }) => {
 
   return (
     <div className="w-62  bg-white rounded-3xl shadow-xl border border-gray-100 flex flex-col h-full overflow-hidden">
-     
+
 
       <div className="flex-1 overflow-y-auto sidebar-scroll p-6 space-y-6">
         {/* Header with Profile Picture */}
@@ -70,32 +70,32 @@ const Sidebar = ({ onSearch, setSearchQuery }) => {
           </div>
         </div>
 
+
         {/* 🔁 Data Source Section */}
         <div className="sidebar-item">
           <label className="block text-sm font-semibold text-gray-400 mb-3">Data Source</label>
           <div className="space-y-2">
             <button
               onClick={() => setSource("public")}
-              className={`w-full p-3 rounded-xl border-2 transition-all text-left font-medium hover:shadow-md ${
-                source === "public"
-                  ? "bg-amber-500 border-amber-400 text-white shadow-lg"
-                  : "bg-gray-700 border-gray-600 text-gray-200 hover:border-gray-500"
-              }`}
+              className={`w-full p-3 rounded-xl border-2 transition-all text-left font-medium hover:shadow-md ${source === "public"
+                ? "bg-amber-500 border-amber-400 text-white shadow-lg"
+                : "bg-gray-700 border-gray-600 text-gray-200 hover:border-gray-500"
+                }`}
             >
               🌐 Public API
             </button>
             <button
               onClick={() => setSource("backend")}
-              className={`w-full p-3 rounded-xl border-2 transition-all text-left font-medium hover:shadow-md ${
-                source === "backend"
-                  ? "bg-amber-500 border-amber-400 text-white shadow-lg"
-                  : "bg-gray-700 border-gray-600 text-gray-200 hover:border-gray-500"
-              }`}
+              className={`w-full p-3 rounded-xl border-2 transition-all text-left font-medium hover:shadow-md ${source === "backend"
+                ? "bg-amber-500 border-amber-400 text-white shadow-lg"
+                : "bg-gray-700 border-gray-600 text-gray-200 hover:border-gray-500"
+                }`}
             >
               🖥️ Backend API
             </button>
           </div>
         </div>
+
 
         {/* 🧠 Dietary Filters Section */}
         <div className="sidebar-item">
@@ -109,17 +109,16 @@ const Sidebar = ({ onSearch, setSearchQuery }) => {
               <button
                 key={filter.key}
                 onClick={() => toggleFilter(filter.key)}
-                className={`w-full p-3 rounded-xl border-2 transition-all text-left font-medium flex items-center justify-between hover:shadow-md ${
-                  filters[filter.key]
-                    ? `bg-${filter.color}-500 border-${filter.color}-400 text-black shadow-lg`
-                    : "bg-gray-700 border-gray-600 text-gray-200 hover:border-gray-500"
-                }`}
+                className={`w-full p-3 rounded-xl border-2 transition-all text-left font-medium flex items-center justify-between hover:shadow-md ${filters[filter.key]
+                  ? `bg-${filter.color}-500 border-${filter.color}-400 text-black shadow-lg`
+                  : "bg-gray-700 border-gray-600 text-gray-200 hover:border-gray-500"
+                  }`}
               >
                 <span>{filter.label}</span>
                 <input
                   type="checkbox"
                   checked={filters[filter.key]}
-                  onChange={() => {}}
+                  onChange={() => { }}
                   className="w-4 h-4 cursor-pointer"
                 />
               </button>
@@ -138,17 +137,16 @@ const Sidebar = ({ onSearch, setSearchQuery }) => {
               <button
                 key={filter.key}
                 onClick={() => toggleFilter(filter.key)}
-                className={`w-full p-3 rounded-xl border-2 transition-all text-left font-medium flex items-center justify-between hover:shadow-md ${
-                  filters[filter.key]
-                    ? `bg-${filter.color}-500 border-${filter.color}-400 text-black shadow-lg`
-                    : "bg-gray-700 border-gray-600 text-gray-200 hover:border-gray-500"
-                }`}
+                className={`w-full p-3 rounded-xl border-2 transition-all text-left font-medium flex items-center justify-between hover:shadow-md ${filters[filter.key]
+                  ? `bg-${filter.color}-500 border-${filter.color}-400 text-black shadow-lg`
+                  : "bg-gray-700 border-gray-600 text-gray-200 hover:border-gray-500"
+                  }`}
               >
                 <span>{filter.label}</span>
                 <input
                   type="checkbox"
                   checked={filters[filter.key]}
-                  onChange={() => {}}
+                  onChange={() => { }}
                   className="w-4 h-4 cursor-pointer"
                 />
               </button>

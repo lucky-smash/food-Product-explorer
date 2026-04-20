@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { loginUser, registerUser } from "../services/authService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Auth = () => {
     const [mode, setMode] = useState("login"); // "login" or "register"
@@ -41,15 +41,21 @@ const Auth = () => {
         console.log(data);
         if (data?.token) {
             localStorage.setItem("token", data.token);
+            window.dispatchEvent(new Event("food-explorer-auth"));
         }
         if (data?.user) {
             localStorage.setItem("user", JSON.stringify(data.user));
+        }
+        if (data?.token) {
+            setSuccess(mode === "login" ? "Login successful! Redirecting…" : "Welcome! Redirecting…");
+            navigate("/dashboard", { replace: true });
+            return;
         }
         setSuccess(mode === "login" ? "Login successful!" : "Registration successful! You can now log in.");
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6 ">
             <div className="w-full max-w-md">
                 <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
                     <div className="text-center mb-8">
@@ -83,7 +89,7 @@ const Auth = () => {
                     <form onSubmit={handleSubmit} className="space-y-4">
                         {mode === "register" && (
                             <input
-                                className="border border-gray-600 bg-gray-700 text-white px-4 py-3 w-full rounded-lg focus:ring-2 focus:ring-amber-500 outline-none placeholder-gray-400"
+                                className="border border-gray-600 bg-white text-black px-4 py-3 w-full rounded-lg focus:ring-2 focus:ring-amber-500 outline-none "
                                 type="text"
                                 name="name"
                                 placeholder="Full Name"
@@ -94,7 +100,7 @@ const Auth = () => {
                         )}
 
                         <input
-                            className="border border-gray-300 bg-white text-gray-800 px-4 py-3 w-full rounded-lg focus:ring-2 focus:ring-amber-400 outline-none placeholder-gray-400"
+                            className="border border-gray-300 bg-white text-black px-4 py-3 w-full rounded-lg focus:ring-2 focus:ring-amber-400 outline-none placeholder-gray-400"
                             type="email"
                             name="email"
                             placeholder="Email Address"
@@ -104,7 +110,7 @@ const Auth = () => {
                         />
 
                         <input
-                            className="border border-gray-300 bg-white text-gray-800 px-4 py-3 w-full rounded-lg focus:ring-2 focus:ring-amber-400 outline-none placeholder-gray-400"
+                            className="border border-gray-300 bg-white text-black px-4 py-3 w-full rounded-lg focus:ring-2 focus:ring-amber-400 outline-none placeholder-gray-400"
                             type="password"
                             name="password"
                             placeholder="Password"
